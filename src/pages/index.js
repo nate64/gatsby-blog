@@ -1,19 +1,30 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
+import 'semantic-ui-css/semantic.min.css'
+import { Container } from 'semantic-ui-react'
 
-import Layout from '../components/layout'
-import Image from '../components/image'
+import Header from '../components/header'
 
-const IndexPage = () => (
-  <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+const TemplateWrapper = ({ children, history }) => (
+  <div>
+    <Helmet>
+      title="Nate's Journey"
+      meta={[ 
+        { name: 'description', content: 'webdev' },
+        { name: 'keywords', content: 'programming, javascript, ruby' }
+      ]}
+    <Helmet/>
+    <Header history={history} />
+    <Container>
+      {children()}
+    </Container>
+  </div>
 )
 
-export default IndexPage
+TemplateWrapper.propTypes = {
+  children: PropTypes.func,
+}
+
+
+export default TemplateWrapper
